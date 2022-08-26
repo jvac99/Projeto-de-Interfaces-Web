@@ -14,8 +14,14 @@ let usuarios = [
 ];
 
 module.exports.inserirUsuario = (req, res) => {
-  usuarios.push(req.body);
-  res.status(200).send(req.body);
+  let novoUsuario = req.body;
+  let validacao = usuarios.some((usuario) => usuario.id == novoUsuario.id);
+  if (validacao) {
+    res.status(422).send("Usuario já existente.");
+    return;
+  }
+  usuarios.push(novoUsuario);
+  res.status(200).send(novoUsuario);
 };
 
 module.exports.listarUsuarios = (req, res) => {
@@ -23,18 +29,23 @@ module.exports.listarUsuarios = (req, res) => {
 };
 
 module.exports.obterUsuario = (req, res) => {
-  var id = req.params.id;
-  var usuario = usuarios.find((usuario) => usuario.id == id);
+  let id = req.params.id;
+  let usuario = usuarios.find((usuario) => usuario.id == id);
 
-  if (usuario) {
-    res.json(usuario);
-  } else {
-    res.status(404).send("Usuário não encontrado.");
+  if (usuario === null) {
+    res.status(400).send("Usuário não encontrado.");
+    return;
   }
+  res.json(usuario);
 };
 
 module.exports.removerUsuario = (req, res) => {
-  var id = req.params.id;
-  usuarios = usuarios.filter((usuario) => usuario.id != id);
+  let id = req.params.id;
+  let newUsuarios = usuarios.filter((usuario) => usuario.id != id);
+  if (newUsuarios.length === usuarios.length) {
+    res.status(400).send("Usuário não encontrado.");
+    return;
+  }
+  usuarios = newUsuarios;
   res.status(200).send(id);
 };
