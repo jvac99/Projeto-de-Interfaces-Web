@@ -13,6 +13,7 @@ module.exports = (() => {
     id_usuario: {
       type: mongoose.Schema.ObjectId,
       ref: "Usuario",
+      required: true,
     },
   });
   return mongoose.model("Post", schema);

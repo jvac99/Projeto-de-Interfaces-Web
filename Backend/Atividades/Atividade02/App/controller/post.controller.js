@@ -1,12 +1,12 @@
 const Post = require("../model/post.model");
+const post_view = require("../view/post.view");
 
 module.exports.inserirPost = (req, res) => {
-  let post = req.body;
-  let promise = Post.create(post);
+  let promise = Post.create(req.body);
 
   promise
     .then((post) => {
-      res.status(201).json(post);
+      res.status(201).json(post_view.render(post));
     })
     .catch((err) => {
       res.status(400).json(err);
@@ -18,7 +18,7 @@ module.exports.listarPosts = (req, res) => {
 
   promise
     .then((posts) => {
-      res.status(200).json(posts);
+      res.status(200).json(post_view.renderMany(posts));
     })
     .catch((err) => {
       res.status(400).json(err);
@@ -31,35 +31,35 @@ module.exports.obterPost = (req, res) => {
 
   promise
     .then((post) => {
-      res.status(200).json(post);
+      res.status(200).json(post_view.render(post));
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(404).json(err);
     });
 };
 
-module.exports.obterPostsUsuario = (req, res) => {
-  let id = req.params.id;
-  let promise = Post.find({ id_usuario: id }).exec();
+module.exports.obterPostsPorUsuario = (req, res) => {
+  let id_usuario = req.params.id;
+  let promise = Post.find({ id_usuario: id_usuario }).exec();
 
   promise
     .then((post) => {
-      res.status(200).json(post);
+      res.status(200).json(post_view.renderMany(post));
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(404).json(err);
     });
 };
 
 module.exports.removerPost = (req, res) => {
   let id = req.params.id;
-  let promise = Post.findOneAndDelete(id).exec();
+  let promise = Post.findByIdAndDelete(id).exec();
 
   promise
     .then((post) => {
-      res.status(200).json(post);
+      res.status(200).json(post_view.render(post));
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(404).json(err);
     });
 };

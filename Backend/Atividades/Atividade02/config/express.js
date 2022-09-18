@@ -1,4 +1,3 @@
-// Importando
 const express = require("express");
 const routeUsuario = require("../App/route/usuario.route");
 const routePost = require("../App/route/post.route");
