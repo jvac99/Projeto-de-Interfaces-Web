@@ -1,8 +1,17 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const Usuario = require("../model/usuario.model");
 const usuario_view = require("../view/usuario.view");
 
 module.exports.inserirUsuario = (req, res) => {
-  let promise = Usuario.create(req.body);
+  const { senha, ...rest } = req.body;
+
+  let usuario = new Usuario({
+    ...rest,
+    senha: bcrypt.hashSync(senha, 10),
+  });
+
+  let promise = Usuario.create(usuario);
 
   promise
     .then((usuario) => {
@@ -10,6 +19,29 @@ module.exports.inserirUsuario = (req, res) => {
     })
     .catch((err) => {
       res.status(400).json(err);
+    });
+};
+
+module.exports.logar = (req, res) => {
+  const { email, senha } = req.body;
+
+  let promise = Usuario.findOne({ email: email });
+
+  promise
+    .then((usuario) => {
+      if (bcrypt.compareSync(senha, usuario.senha)) {
+        let token = jwt.sign({ usuario: usuario }, "secret");
+        res.status(200).json({
+          message: "Logado",
+          token: token,
+          userId: Usuario.id,
+        });
+      } else {
+        res.status(401).json("Login Falhou!");
+      }
+    })
+    .catch((error) => {
+      res.status(401).json("Login Falhou!");
     });
 };
 
@@ -39,7 +71,9 @@ module.exports.obterUsuario = (req, res) => {
 };
 
 module.exports.removerUsuario = (req, res) => {
-  let id = req.params.id;
+  let token = req.headers.token;
+  let payload = jwt.decode(token);
+  let id = payload.id;
   let promise = Usuario.findByIdAndDelete(id).exec();
 
   promise

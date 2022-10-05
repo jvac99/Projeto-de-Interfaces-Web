@@ -2,7 +2,17 @@ const Post = require("../model/post.model");
 const post_view = require("../view/post.view");
 
 module.exports.inserirPost = (req, res) => {
-  let promise = Post.create(req.body);
+  let token = req.headers.token;
+  let payload = jwt.decode(token);
+  let id_usuario_token = payload.id;
+  let val = req.body;
+
+  let post = {
+    val,
+    id_usuario: id_usuario_token,
+  };
+
+  let promise = Post.create(post);
 
   promise
     .then((post) => {
@@ -55,9 +65,16 @@ module.exports.removerPost = (req, res) => {
   let id = req.params.id;
   let promise = Post.findByIdAndDelete(id).exec();
 
+  let token = req.headers.token;
+  let payload = jwt.decode(token);
+  let id_usuario_token = payload.id;
+
   promise
     .then((post) => {
-      res.status(200).json(post_view.render(post));
+      if (id_usuario_token === post.id_usuario) {
+        res.status(200).json(post_view.render(post));
+      }
+      res.status(404).json("Error");
     })
     .catch((err) => {
       res.status(404).json(err);
