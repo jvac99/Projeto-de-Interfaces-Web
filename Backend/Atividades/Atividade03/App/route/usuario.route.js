@@ -1,5 +1,5 @@
 const controller = require("../controller/usuario.controller");
-let auth = require("../controller/auth.controller");
+const auth = require("../controller/auth.controller");
 
 module.exports = (app) => {
   app.post("/usuarios/logar", controller.logar);

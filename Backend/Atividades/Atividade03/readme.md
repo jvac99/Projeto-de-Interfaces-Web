@@ -1,4 +1,8 @@
-# Atividade 2
+# Atividade 3
+
+## Node.js, Express.js e Mongoose REST
+
+#### João Victor Aquino Correia (470914)
 
 ## Node.js, Express.js e Mongoose REST
 

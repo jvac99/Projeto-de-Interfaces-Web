@@ -1,8 +1,14 @@
+const jwt = require("jsonwebtoken");
 const Comentario = require("../model/comentario.model");
 const comentario_view = require("../view/comentario.view");
 
 module.exports.inserirComentario = (req, res) => {
-  let promise = Comentario.create(req.body);
+  let token = req.headers.token;
+  let payload = jwt.decode(token);
+  let id_usuario_token = payload.id;
+  let comentario = req.body;
+  comentario.id_usuario = id_usuario_token;
+  let promise = Comentario.create(comentario);
 
   promise
     .then((comentario) => {
@@ -54,11 +60,26 @@ module.exports.obterComentariosPorPost = (req, res) => {
 
 module.exports.removerComentario = (req, res) => {
   let id = req.params.id;
-  let promise = Comentario.findByIdAndDelete(id).exec();
+  let promise = Comentario.findById(id).exec();
+
+  let token = req.headers.token;
+  let payload = jwt.decode(token);
+  let id_usuario_token = payload.id;
 
   promise
     .then((comentario) => {
-      res.status(200).json(comentario_view.render(comentario));
+      if (id_usuario_token == comentario.id_usuario) {
+        Comentario.deleteOne({ _id: id })
+          .exec()
+          .then(() => {
+            res.status(200).json(comentario_view.render(comentario));
+          })
+          .catch((err) => {
+            res.status(404).json(err);
+          });
+      } else {
+        res.status(404).json("Não autenticado");
+      }
     })
     .catch((err) => {
       res.status(404).json(err);

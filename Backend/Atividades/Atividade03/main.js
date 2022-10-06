@@ -8,4 +8,4 @@ http.createServer(app).listen(app.get("port"), () => {
   console.log("Servidor express está rodando na porta: " + app.get("port"));
 });
 
-db("mongodb://localhost/atividade02");
+db("mongodb://localhost/atividade03");
