@@ -30,11 +30,10 @@ module.exports.logar = (req, res) => {
   promise
     .then((usuario) => {
       if (bcrypt.compareSync(senha, usuario.senha)) {
-        let token = jwt.sign({ usuario: usuario }, "secret");
+        let token = jwt.sign({ id: usuario._id }, "secret");
         res.status(200).json({
           message: "Logado",
           token: token,
-          userId: Usuario.id,
         });
       } else {
         res.status(401).json("Login Falhou!");
@@ -73,14 +72,20 @@ module.exports.obterUsuario = (req, res) => {
 module.exports.removerUsuario = (req, res) => {
   let token = req.headers.token;
   let payload = jwt.decode(token);
-  let id = payload.id;
-  let promise = Usuario.findByIdAndDelete(id).exec();
+  let id_token = payload.id;
+  let id = req.params.id;
+  console.log(payload);
+  if (id_token === id) {
+    let promise = Usuario.findByIdAndDelete(id).exec();
 
-  promise
-    .then((usuario) => {
-      res.status(200).json(usuario_view.render(usuario));
-    })
-    .catch((err) => {
-      res.status(404).json(err);
-    });
+    promise
+      .then((usuario) => {
+        res.status(200).json(usuario_view.render(usuario));
+      })
+      .catch((err) => {
+        res.status(404).json(err);
+      });
+  } else {
+    res.status(401).json("Falhou!");
+  }
 };

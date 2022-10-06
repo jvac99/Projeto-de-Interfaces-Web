@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const Post = require("../model/post.model");
 const post_view = require("../view/post.view");
 
@@ -5,12 +6,10 @@ module.exports.inserirPost = (req, res) => {
   let token = req.headers.token;
   let payload = jwt.decode(token);
   let id_usuario_token = payload.id;
-  let val = req.body;
+  let post = req.body;
+  post.id_usuario = id_usuario_token;
 
-  let post = {
-    val,
-    id_usuario: id_usuario_token,
-  };
+  console.log(post);
 
   let promise = Post.create(post);
 
@@ -63,7 +62,7 @@ module.exports.obterPostsPorUsuario = (req, res) => {
 
 module.exports.removerPost = (req, res) => {
   let id = req.params.id;
-  let promise = Post.findByIdAndDelete(id).exec();
+  let promise = Post.findById(id).exec();
 
   let token = req.headers.token;
   let payload = jwt.decode(token);
@@ -71,10 +70,18 @@ module.exports.removerPost = (req, res) => {
 
   promise
     .then((post) => {
-      if (id_usuario_token === post.id_usuario) {
-        res.status(200).json(post_view.render(post));
+      if (id_usuario_token == post.id_usuario) {
+        Post.deleteOne({ _id: id })
+          .exec()
+          .then(() => {
+            res.status(200).json(post_view.render(post));
+          })
+          .catch((err) => {
+            res.status(404).json(err);
+          });
+      } else {
+        res.status(404).json("Não autenticado");
       }
-      res.status(404).json("Error");
     })
     .catch((err) => {
       res.status(404).json(err);
