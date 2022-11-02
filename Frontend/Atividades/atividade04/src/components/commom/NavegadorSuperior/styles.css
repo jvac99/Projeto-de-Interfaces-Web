@@ -1,0 +1,27 @@
+.navegadorSuperior {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(176, 176, 185);
+  width: 700px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.navegadorSuperior .logo {
+  width: 30px;
+  height: 30px;
+}
+
+.navegadorSuperior .button {
+  display: block;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition-duration: 0.15s;
+  background-color: transparent;
+}

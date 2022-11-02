@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(176, 176, 185);
+  width: 700px;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.card .title {
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+}
+
+.card .content {
+  text-align: center;
+  margin: 10px;
+}
+
+.card .likes {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 10px;
+}
+
+.card .button {
+  display: block;
+  width: 100px;
+  height: 30px;
+  border: 1px solid white;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition-duration: 0.15s;
+  background-color: transparent;
+}
