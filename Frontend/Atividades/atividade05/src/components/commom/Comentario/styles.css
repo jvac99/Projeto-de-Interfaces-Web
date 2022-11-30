@@ -1,0 +1,19 @@
+.card-comentario {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 3px solid white;
+  width: 100%;
+  margin: 15px 0px 15px 0px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.card-comentario .title-comentario {
+  font-weight: bold;
+  margin: 10px;
+}
+
+.card-comentario .content-comentario {
+  margin: 10px;
+  font-style: italic;
+}

@@ -1,0 +1,29 @@
+.container-postar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.container-postar .container-content {
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+  width: 700px;
+  margin: 10px;
+}
+
+.form-postar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-postar .add-postar {
+  margin: 15px;
+}
+
+.form-postar .add-postar-button {
+  margin: 15px;
+}

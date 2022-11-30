@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const routeUsuario = require("../App/route/usuario.route");
 const routePost = require("../App/route/post.route");
 const routeComentario = require("../App/route/comentario.route");
@@ -6,6 +7,7 @@ const routeComentario = require("../App/route/comentario.route");
 module.exports = () => {
   let app = express();
   app.set("port", 3000);
+  app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   routeUsuario(app);

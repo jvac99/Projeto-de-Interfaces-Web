@@ -1,0 +1,53 @@
+.navegador-superior {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.navegador-superior .container-navegador-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: antiquewhite;
+  width: 700px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.container-navegador-superior .logo-navegador-superior {
+  background-color: beige;
+  width: 30px;
+  height: 100%;
+}
+
+.container-navegador-superior .items-navegador-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.navegador-superior .button-navegador-superior {
+  display: block;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition-duration: 0.15s;
+  background-color: transparent;
+}
+
+.navegador-superior .button-navegador-superior {
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+  font-weight: bold;
+  transition-duration: 0.15s;
+  background-color: transparent;
+  text-decoration: none;
+  color: black;
+}
