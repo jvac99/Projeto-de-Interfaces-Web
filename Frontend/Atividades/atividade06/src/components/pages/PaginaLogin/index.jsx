@@ -14,22 +14,27 @@ const PaginaLogin = () => {
   const tratarSubmit = (data) => {
     login(data.email, data.senha)
       .then((response) => {
-        auth.setToken(response.data.token);
+        auth.setToken(response.data.token, true);
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit(tratarSubmit)}>
-        <input {...register("email")} type="text" placeholder="Email" />
-        <br />
-        <input type="password" {...register("senha")} placeholder="Senha" />
-        <button type="submit">Enviar</button>
-      </form>
+    <div className="logon-container">
+      <section className="form">
+        <form onSubmit={handleSubmit(tratarSubmit)}>
+          <h1>Faça o seu Login</h1>
+          <input {...register("email")} type="text" placeholder="Email" />
+          <br />
+          <input type="password" {...register("senha")} placeholder="Senha" />
+          <button className="button" type="submit">
+            Entrar
+          </button>
+        </form>
+      </section>
     </div>
   );
 };

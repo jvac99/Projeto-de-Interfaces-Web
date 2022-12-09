@@ -1,58 +1,101 @@
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import {
+  criarComentario,
+  fetchComentariosPorPost,
+} from "../../../api/comentarios.api";
+import { authContext } from "../../../Routes";
 import Comentario from "../Comentario";
 import "./styles.css";
+import { fetchusuario } from "../../../api/usuarios.api";
 
-const Post = ({ nome, mensagem, qtdLikes, comentarios }) => {
-  const [like, setLike] = useState(qtdLikes);
+const Post = ({ id_post, id_usuario, mensagem, likes }) => {
+  const [nome, setNome] = useState();
+  const [comentarios, setComentarios] = useState([]);
+  const [like, setLike] = useState(likes);
+  const [inputValue, setInputValue] = useState("");
+  let { register, handleSubmit } = useForm();
+  let auth = useContext(authContext);
+
+  useEffect(() => {
+    fetchComentariosPorPost(auth.token, id_post)
+      .then((response) => {
+        setComentarios(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    fetchusuario(auth.token, id_usuario)
+      .then((response) => {
+        setNome(response.data.nome);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [textBtlike, setTextBtLike] = useState(
     <FcLikePlaceholder className="imgLike" />
   );
 
   const onclickBtLike = () => {
-    if (qtdLikes == like) {
-      setLike(qtdLikes + 1);
+    if (likes == like) {
+      setLike(likes + 1);
       setTextBtLike(<FcLike className="imgLike" />);
     } else {
-      setLike(qtdLikes);
+      setLike(likes);
       setTextBtLike(<FcLikePlaceholder className="imgLike" />);
     }
   };
 
-  const navigate = useNavigate();
+  const handleUserInput = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const tratarSubmit = (data) => {
+    criarComentario(data.texto, id_post, auth.token).then(({ data }) => {
+      setComentarios((current) => [...current, data]);
+      setInputValue("");
+    });
+  };
 
   return (
     <div className="container-posts">
       <div className="card-post">
-        <h1 className="title-post">{nome}</h1>
-        <p className="content-post">{mensagem}</p>
+        <h1>{nome}</h1>
+        <p>{mensagem}</p>
         <div className="likes-post">
-          <h3 className="qtdLikes-post">{like} likes</h3>
+          <h3 className="likes-post">{like} likes</h3>
           <button className="button-post" onClick={onclickBtLike}>
             {textBtlike}
           </button>
         </div>
       </div>
 
-      <div className="comentarios-post">
+      <div>
         {comentarios.map(({ id, usuario, texto }) => (
-          <Comentario nome={usuario.nome} mensagem={texto} key={id} />
+          <Comentario id_usuario={usuario.id} mensagem={texto} key={id} />
         ))}
+      </div>
 
-        <form className="form-comentario" onSubmit={() => navigate("/")}>
-          <textarea
-            rows="5"
-            cols="33"
-            placeholder="Adicionar comentário"
-            className="add-comentario"
-          />
-          <input
-            type="submit"
-            value="Adicionar"
-            className="add-comentario-button"
-          />
-        </form>
+      <div>
+        <div className="content">
+          <section className="form">
+            <form onSubmit={handleSubmit(tratarSubmit)}>
+              <textarea
+                rows="5"
+                cols="33"
+                placeholder="Adicionar comentário"
+                {...register("texto")}
+                value={inputValue}
+                onChange={handleUserInput}
+              />
+              <input type="submit" value="Adicionar" className="button" />
+            </form>
+          </section>
+        </div>
       </div>
     </div>
   );

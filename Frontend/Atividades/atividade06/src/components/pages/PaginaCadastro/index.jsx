@@ -15,20 +15,27 @@ const PaginaCadastro = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit(tratarSubmit)}>
-        <input {...register("nome")} type="text" placeholder="Nome" />
-        <br />
-        <input {...register("email")} type="text" placeholder="Email" />
-        <br />
-        <input type="password" {...register("senha")} placeholder="Senha" />
-        <button type="submit">Enviar</button>
-      </form>
+    <div className="register-container">
+      <div className="content">
+        <section className="form">
+          <form onSubmit={handleSubmit(tratarSubmit)}>
+            <h1>Cadastro</h1>
+            <input {...register("nome")} type="text" placeholder="Nome" />
+            <br />
+            <input {...register("email")} type="text" placeholder="Email" />
+            <br />
+            <input type="password" {...register("senha")} placeholder="Senha" />
+            <button className="button" type="submit">
+              Cadastrar
+            </button>
+          </form>
+        </section>
+      </div>
     </div>
   );
 };

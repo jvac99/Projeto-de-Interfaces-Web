@@ -8,49 +8,6 @@ const LinhaDoTempo = () => {
   let [posts, setPosts] = useState([]);
   let auth = useContext(authContext);
 
-  // let infoPost = [
-  //   {
-  //     id: 1,
-  //     nome: "Joao",
-  //     texto: "Menino, tá quente demais hoje",
-  //     qtdLikes: 1,
-  //     comentarios: [
-  //       {
-  //         id: 1,
-  //         texto: "Nem me diga",
-  //         usuario: {
-  //           id: 1,
-  //           nome: "Robson",
-  //         },
-  //       },
-  //       {
-  //         id: 2,
-  //         texto: "Num aguento mais essa quintura",
-  //         usuario: {
-  //           id: 2,
-  //           nome: "Luana",
-  //         },
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     nome: "Tiago",
-  //     texto: "Num aguento mais essa quintura",
-  //     qtdLikes: 3,
-  //     comentarios: [
-  //       {
-  //         id: 1,
-  //         texto: "Nem me diga",
-  //         usuario: {
-  //           id: 1,
-  //           nome: "José da Silva",
-  //         },
-  //       },
-  //     ],
-  //   },
-  // ];
-
   useEffect(() => {
     fetchPosts(auth.token)
       .then((response) => {
@@ -63,22 +20,13 @@ const LinhaDoTempo = () => {
 
   return (
     <div className="posts">
-      {posts.map(({ id, texto, likes }) => (
+      {posts.map(({ id, texto, likes, usuario }) => (
         <Post
-          nome={"teste"}
+          id_post={id}
+          id_usuario={usuario.id}
           mensagem={texto}
-          qtdLikes={likes}
+          likes={likes}
           key={id}
-          comentarios={[
-            {
-              id: 1,
-              texto: "Nem me diga",
-              usuario: {
-                id: 1,
-                nome: "José da Silva",
-              },
-            },
-          ]}
         />
       ))}
     </div>

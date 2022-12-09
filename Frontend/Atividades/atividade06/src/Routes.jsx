@@ -11,9 +11,14 @@ export const authContext = createContext(null);
 export const AppRoutes = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  const setTokenLocal = (token) => {
-    setToken(token);
-    localStorage.setItem("token", token);
+  const setTokenLocal = (token, status) => {
+    if (status) {
+      setToken(token);
+      localStorage.setItem("token", token);
+    } else {
+      setToken(token);
+      localStorage.removeItem("token");
+    }
   };
 
   return (

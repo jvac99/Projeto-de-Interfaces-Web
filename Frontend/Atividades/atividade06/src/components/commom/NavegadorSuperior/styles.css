@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  align-content: space-between;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -9,10 +14,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: antiquewhite;
+
+  background-color: #25d3ea;
   width: 700px;
   margin: 10px;
-  padding: 10px;
+  padding: 18px;
+  border-radius: 8px;
+  position: relative;
 }
 
 .container-navegador-superior .logo-navegador-superior {
@@ -49,5 +57,30 @@
   transition-duration: 0.15s;
   background-color: transparent;
   text-decoration: none;
-  color: black;
+  color: #fff;
+}
+
+.navegador-superior .nav-navegador-superior {
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+  font-weight: bold;
+  transition-duration: 0.15s;
+  background-color: transparent;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navegador-superior .name-navegador-superior {
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.navegador-superior .name-navegador-superior:hover,
+.navegador-superior .nav-navegador-superior:hover {
+  text-shadow: 0 0 5px #fff;
 }

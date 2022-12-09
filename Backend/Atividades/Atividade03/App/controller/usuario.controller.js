@@ -30,7 +30,7 @@ module.exports.logar = (req, res) => {
   promise
     .then((usuario) => {
       if (bcrypt.compareSync(senha, usuario.senha)) {
-        let token = jwt.sign({ id: usuario._id }, "secret");
+        let token = jwt.sign({ id: usuario._id, nome: usuario.nome }, "secret");
         res.status(200).json({
           message: "Logado",
           token: token,

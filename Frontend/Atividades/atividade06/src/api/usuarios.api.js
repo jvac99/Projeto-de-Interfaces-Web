@@ -34,3 +34,13 @@ export const fetchusuarios = (token) => {
     },
   });
 };
+
+export const fetchusuario = (token, id_usuario) => {
+  return axios({
+    method: "GET",
+    url: url_base + `/usuarios/${id_usuario}`,
+    headers: {
+      token,
+    },
+  });
+};

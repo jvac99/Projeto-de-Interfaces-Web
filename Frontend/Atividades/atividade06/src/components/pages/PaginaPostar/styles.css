@@ -1,29 +1,29 @@
-.container-postar {
+.post-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 100vh;
+  margin: 0 auto;
+
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.post-container section.form {
   width: 100%;
+  max-width: 350px;
+  margin-right: 30px;
 }
 
-.container-postar .container-content {
-  display: flex;
-  flex-direction: column;
-  background-color: antiquewhite;
-  width: 700px;
-  margin: 10px;
+.post-container section.form form {
+  margin-top: 100px;
 }
 
-.form-postar {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 20px;
+.post-container section.form form h1 {
+  font-size: 32px;
+  margin-bottom: 32px;
 }
 
-.form-postar .add-postar {
-  margin: 15px;
-}
-
-.form-postar .add-postar-button {
-  margin: 15px;
+.post-container section.form form input {
+  margin-top: 8px;
 }

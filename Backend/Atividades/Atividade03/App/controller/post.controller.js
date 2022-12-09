@@ -9,8 +9,6 @@ module.exports.inserirPost = (req, res) => {
   let post = req.body;
   post.id_usuario = id_usuario_token;
 
-  console.log(post);
-
   let promise = Post.create(post);
 
   promise
@@ -31,6 +29,20 @@ module.exports.listarPosts = (req, res) => {
     })
     .catch((err) => {
       res.status(400).json(err);
+    });
+};
+
+module.exports.atualizarPost = (req, res) => {
+  let id = req.params.id;
+  let newPost = req.body;
+  let promise = Post.findByIdAndUpdate(id, newPost).exec();
+
+  promise
+    .then(() => {
+      res.status(200).json(newPost);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
     });
 };
 

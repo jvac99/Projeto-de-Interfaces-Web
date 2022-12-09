@@ -5,6 +5,7 @@ module.exports = (app) => {
   app.use("/posts/", auth.checar);
   app.post("/posts", controller.inserirPost);
   app.get("/posts", controller.listarPosts);
+  app.put("/posts/:id", controller.atualizarPost);
   app.get("/posts/:id", controller.obterPost);
   app.get("/usuarios/:id/posts", controller.obterPostsPorUsuario);
   app.delete("/posts/:id", controller.removerPost);

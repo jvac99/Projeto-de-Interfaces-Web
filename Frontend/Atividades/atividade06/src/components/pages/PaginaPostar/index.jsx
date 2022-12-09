@@ -23,18 +23,23 @@ const PaginaPostar = () => {
   };
 
   return (
-    <div className="container-postar">
-      <div className="container-content">
-        <form className="form-postar" onSubmit={handleSubmit(tratarSubmit)}>
-          <textarea
-            rows="5"
-            cols="33"
-            placeholder="Adicionar"
-            className="add-postar"
-            {...register("texto")}
-          />
-          <input type="submit" value="Postar" className="add-postar-button" />
-        </form>
+    <div className="post-container">
+      <div className="content">
+        <section className="form">
+          <form onSubmit={handleSubmit(tratarSubmit)}>
+            <h1>Postar</h1>
+            <textarea
+              rows="5"
+              cols="33"
+              placeholder="Adicionar"
+              {...register("texto")}
+            />
+            <br />
+            <button className="button" type="submit">
+              Cadastrar
+            </button>
+          </form>
+        </section>
       </div>
     </div>
   );

@@ -7,32 +7,32 @@
 }
 
 .container-posts .card-post {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: antiquewhite;
-  margin-bottom: 20px;
+  display: block;
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  position: relative;
+  margin-bottom: 16px;
 }
 
-.card-post .title-post {
-  font-weight: bold;
-  text-align: center;
-  margin: 10px;
+.container-posts .card-post h1 {
+  color: #41414d;
 }
 
-.card-post .content-post {
-  text-align: center;
-  margin: 10px;
+.container-posts .card-post p {
+  color: #737380;
+  line-height: 21px;
+  font-size: 16px;
 }
 
-.card-post .likes-post {
+.container-posts .card-post .likes-post {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin: 10px;
 }
 
-.card-post .button-post {
+.container-posts .card-post .button-post {
   display: block;
   width: 100px;
   height: 30px;
@@ -48,26 +48,21 @@
   border-radius: 20px;
 }
 
-.comentarios-post {
-  display: flex;
-  flex-direction: column;
+.form-comentario-container section.form {
   width: 100%;
-  background-color: rgb(236, 227, 217);
-  margin-bottom: 20px;
+  max-width: 350px;
+  margin-right: 30px;
 }
 
-.form-comentario {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 15px;
+.form-comentario-container section.form form {
+  margin-top: 100px;
 }
 
-.form-comentario .add-comentario {
-  margin: 15px;
+.form-comentario-container section.form form h1 {
+  font-size: 32px;
+  margin-bottom: 32px;
 }
 
-.form-comentario.add-comentario-button {
-  margin: 15px;
+.form-comentario-container section.form form input {
+  margin-top: 8px;
 }
