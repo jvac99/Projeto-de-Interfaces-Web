@@ -1,0 +1,17 @@
+.paginaCadastro-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.paginaCadastro-container .forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.paginaCadastro-container .forms input {
+  margin: 10px;
+}

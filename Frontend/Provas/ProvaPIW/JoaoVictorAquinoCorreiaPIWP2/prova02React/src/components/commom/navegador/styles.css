@@ -1,0 +1,30 @@
+.container-navegador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.container-navegador .items-navegador {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: antiquewhite;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  justify-content: space-evenly;
+}
+
+.container-navegador .item-navegador {
+  text-decoration: none;
+  list-style: none;
+  font-style: normal;
+}
+
+.container-navegador .item-navegador-link {
+  text-decoration: none;
+  list-style: none;
+  font-style: normal;
+  color: black;
+}

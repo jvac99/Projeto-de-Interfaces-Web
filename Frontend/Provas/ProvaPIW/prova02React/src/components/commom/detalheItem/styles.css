@@ -1,0 +1,16 @@
+.item {
+  text-decoration: none;
+  list-style: none;
+  width: 100%;
+  height: max-content;
+}
+
+.item-title {
+  background-color: gray;
+  color: aliceblue;
+  width: 100%;
+}
+
+.item-body {
+  background-color: bisque;
+}
